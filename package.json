@@ -8,10 +8,10 @@
         "vscode": "^1.25.0"
     },
     "categories": [
-        "Other"
+        "Formatters"
     ],
     "activationEvents": [
-        "onCommand:extension.sayHello"
+        "*"
     ],
     "main": "./out/extension",
     "contributes": {
@@ -37,6 +37,7 @@
         "@types/mocha": "^2.2.42"
     },
     "dependencies": {
+        "@types/prettier": "^1.13.2",
         "prettier": "^1.13.7"
     }
 }

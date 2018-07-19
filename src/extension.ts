@@ -1,29 +1,43 @@
 'use strict';
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import { DocumentFormattingEditProvider, TextDocument, FormattingOptions, CancellationToken, ProviderResult, TextEdit, Range, DocumentRangeFormattingEditProvider } from 'vscode';
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+const prettier = require('prettier');
+
+
+
 export function activate(context: vscode.ExtensionContext) {
-
-    // Use the console to output diagnostic information (console.log) and errors (console.error)
-    // This line of code will only be executed once when your extension is activated
-    console.log('Congratulations, your extension "handlebars-formatter" is now active!');
-
-    // The command has been defined in the package.json file
-    // Now provide the implementation of the command with  registerCommand
-    // The commandId parameter must match the command field in package.json
-    let disposable = vscode.commands.registerCommand('extension.sayHello', () => {
-        // The code you place here will be executed every time your command is executed
-
-        // Display a message box to the user
-        vscode.window.showInformationMessage('Hello World!');
-    });
-
-    context.subscriptions.push(disposable);
+    vscode.languages.registerDocumentFormattingEditProvider({ scheme: 'file', language: 'handlebars' }, new PrettierHandlebarsFormatter());
 }
 
 // this method is called when your extension is deactivated
 export function deactivate() {
+}
+
+function fullDocumentRange(document: TextDocument): Range {
+    const lastLineId = document.lineCount - 1;
+    return new Range(0, 0, lastLineId, document.lineAt(lastLineId).text.length);
+}
+class PrettierHandlebarsFormatter implements DocumentFormattingEditProvider, DocumentRangeFormattingEditProvider {
+    provideDocumentRangeFormattingEdits(document: TextDocument, range: Range, options: FormattingOptions, token: CancellationToken): ProviderResult<TextEdit[]> {
+        const text = document.getText(range);
+        const prettierOptions = {
+            parser: 'glimmner'
+        }
+        const formatted = prettier.format(text, prettierOptions);
+        return [TextEdit.replace(range, formatted)];
+    }
+    provideDocumentFormattingEdits(document: TextDocument, options: FormattingOptions, token: CancellationToken): ProviderResult<TextEdit[]> {
+        const { activeTextEditor } = vscode.window;
+        if (activeTextEditor && activeTextEditor.document.languageId === 'handlebars') {
+            const options = {
+                parser: 'glimmer',
+            };
+            const text = document.getText();
+            const formatted = prettier.format(text, options);
+            const range = fullDocumentRange(document);
+            return [TextEdit.replace(range, formatted)];
+        }
+    }
+
 }
