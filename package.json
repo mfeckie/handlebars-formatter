@@ -4,6 +4,7 @@
     "description": "Prettier formatting for Handlebars files",
     "version": "0.0.1",
     "publisher": "mfeckie",
+    "repository": "https://github.com/mfeckie/handlebars-formatter.git", 
     "engines": {
         "vscode": "^1.25.0"
     },
