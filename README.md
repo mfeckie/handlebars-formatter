@@ -8,6 +8,16 @@ Because it uses unreleased, it may break with future changes to Prettier.
 
 Format your handlebars files with Prettier ... that's it!
 
+Example below from a slightly complex template from [Discourse](https://github.com/discourse/discourse/blob/master/app/assets/javascripts/discourse/templates/preferences-username.hbs)
+
+Before
+
+![before](/images/before.png)
+
+After
+
+![after](/images/after.png)
+
 ## Usage
 Using Command Palette (CMD/CTRL + Shift + P)
 
