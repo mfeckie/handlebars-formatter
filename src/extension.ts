@@ -22,7 +22,7 @@ class PrettierHandlebarsFormatter implements DocumentFormattingEditProvider, Doc
     provideDocumentRangeFormattingEdits(document: TextDocument, range: Range, options: FormattingOptions, token: CancellationToken): ProviderResult<TextEdit[]> {
         const text = document.getText(range);
         const prettierOptions = {
-            parser: 'glimmner'
+            parser: 'glimmer'
         }
         const formatted = prettier.format(text, prettierOptions);
         return [TextEdit.replace(range, formatted)];
