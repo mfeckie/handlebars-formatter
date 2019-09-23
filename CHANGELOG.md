@@ -1,7 +1,5 @@
 # Change Log
-All notable changes to the "handlebars-formatter" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
-## [Unreleased]
-- Initial release
+## 0.0.4
+- Upgrades Prettier
+- Enables formatting selection only
