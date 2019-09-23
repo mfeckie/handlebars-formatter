@@ -20,7 +20,8 @@
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile",
+    "copyFixtures": "cp -R ./test-fixtures ./out/test/suite/",
+    "pretest": "npm run compile && npm run copyFixtures",
     "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
