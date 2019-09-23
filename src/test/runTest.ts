@@ -1,5 +1,4 @@
 import * as path from 'path';
-import { copySync, removeSync } from 'fs-extra';
 
 import { runTests } from 'vscode-test';
 
@@ -12,10 +11,6 @@ async function main() {
 		// The path to test runner
 		// Passed to --extensionTestsPath
 		const extensionTestsPath = path.resolve(__dirname, './suite/index');
-
-		// Copy across fixtures for testing
-		removeSync(path.join(extensionTestsPath, 'test-fixtures'));
-		copySync(path.join(extensionDevelopmentPath, 'test-fixtures'), path.join(extensionTestsPath, 'test-fixtures'));
 
 		// Download VS Code, unzip it and run the integration test
 		await runTests({ extensionDevelopmentPath, extensionTestsPath });
