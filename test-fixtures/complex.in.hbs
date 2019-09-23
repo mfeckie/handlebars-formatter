@@ -1,0 +1,396 @@
+<ul>
+  <NavExpanderButton
+    @openSection={{this.openSection}}
+    @inactiveRoute="bookings.get-started" @productActive={{this.usesBookingsProduct}} @sectionName="Bookings" @icon="product-bookings" >
+    <li>
+                        <LinkTo @route="bookings.history">
+
+
+        <i class="fa fa-history right"></i>
+        Booking History
+      </LinkTo>
+    </li>
+    <li>
+      <LinkTo @route="bookings.reasons">
+        <i class="fa fa-list right"></i>
+        Appointment Types
+      </LinkTo>
+    </li>
+    <li>
+      <LinkTo
+        @route="practitioner-setup.index"
+        @query={{hash status=undefined}}
+      >
+        <i class="fa fa-user right"></i>
+        Practitioner Setup
+      </LinkTo>
+    </li>
+    <li>
+      <LinkTo @route="bookings.alerts">
+        <i class="fa fa-bullhorn right"></i>
+        Patient Alerts
+      </LinkTo>
+    </li>
+    <li>
+      <LinkTo @route="bookings.sessions">
+        <i class="fa fa-calendar right"></i>
+        Hide Sessions
+      </LinkTo>
+    </li>
+    <li>
+      <LinkTo @route="bookings.analytics">
+        <i class="fa fa-bar-chart-o right"></i>
+        Analytics
+      </LinkTo>
+    </li>
+    <li>
+      <LinkTo @route="bookings.widgets.index">
+        <i class="fa fa-sliders right"></i>
+        Widgets
+      </LinkTo>
+    </li>
+    <li>
+      <LinkTo @route="bookings.settings">
+        <i class="fa fa-sliders right"></i>
+        Settings
+      </LinkTo>
+    </li>
+  </NavExpanderButton>
+  {{#if this.shouldSeePatientSearch}}
+    <NavExpanderButton
+      @openSection={{this.openSection}}
+      @productActive={{true}}
+      @sectionName="Patients"
+      @icon="patients-icon"
+    >
+      <li>
+        <LinkTo @route="patient-search">
+          <i class="fa fa-search right"></i>
+          Patient Search
+        </LinkTo>
+      </li>
+    </NavExpanderButton>
+  {{/if}}
+  <NavExpanderButton
+    data-test-recalls-nav
+    @openSection={{this.openSection}}
+    @inactiveRoute="recalls.get-started"
+    @productActive={{this.usesRecallsProduct}}
+    @sectionName="Recalls"
+    @icon="product-recalls"
+    @onExpand={{action "expandRecalls"}}
+  >
+    {{#if this.usesRecallsResults}}
+      <li>
+        <LinkTo @route="recalls.results.activity">
+          Results
+          {{#if this.resultBadgeCount}}
+            <div class="badge red">
+              {{#if (gt this.resultBadgeCount 99)}}
+                99+
+              {{else}}
+                {{this.resultBadgeCount}}
+              {{/if}}
+            </div>
+          {{/if}}
+        </LinkTo>
+      </li>
+      <li>
+        <LinkTo @route="recalls.activity">
+          Clinical Reminders
+          {{#if this.recallBadgeCount}}
+            <div class="badge red">
+              {{#if (gt this.recallBadgeCount 99)}}
+                99+
+              {{else}}
+                {{this.recallBadgeCount}}
+              {{/if}}
+            </div>
+          {{/if}}
+        </LinkTo>
+      </li>
+    {{else}}
+      <li>
+        <LinkTo @route="recalls.activity">
+          <i class="fa fa-star-o right"></i>
+          Activity
+        </LinkTo>
+      </li>
+    {{/if}}
+    <li>
+      <LinkTo @route="recalls.recall-campaign-template">
+        <i class="fa fa-star-o right"></i>
+        Template Groups
+      </LinkTo>
+    </li>
+    <li>
+      <LinkTo @route="recalls.settings">
+        <i class="fa fa-sliders right"></i>
+        Settings
+      </LinkTo>
+    </li>
+  </NavExpanderButton>
+  <NavExpanderButton
+    @openSection={{this.openSection}}
+    @inactiveRoute="reminders.get-started"
+    @productActive={{this.usesRemindersProduct}}
+    @sectionName="Reminders"
+    @icon="product-reminders"
+  >
+    <li>
+      <LinkTo @route="reminders.future">
+        <i class="fa fa-forward right"></i>
+        Future Reminders
+      </LinkTo>
+    </li>
+    <li>
+      <LinkTo @route="reminders.historic">
+        <i class="fa fa-history right"></i>
+        History
+      </LinkTo>
+    </li>
+    <li>
+      <LinkTo @route="reminders.unsent">
+        <i class="fa fa-exclamation right"></i>
+        Unsent Reminders
+      </LinkTo>
+    </li>
+    <li>
+      <LinkTo @route="reminders.settings">
+        <i class="fa fa-sliders right"></i>
+        Settings
+      </LinkTo>
+    </li>
+  </NavExpanderButton>
+  <NavExpanderButton
+    @openSection={{this.openSection}}
+    @inactiveRoute="repeats.get-started"
+    @productActive={{this.usesRepeatsProduct}}
+    @sectionName="Repeats"
+    @icon="product-repeats"
+  >
+    <li>
+      <LinkTo @route="prescription-requests">
+        <i class="fa fa-envelope right"></i>
+        Prescription Requests
+      </LinkTo>
+    </li>
+    <li>
+      <LinkTo @route="referral-requests">
+        <i class="fa fa-envelope right"></i>
+        Referral Requests
+      </LinkTo>
+    </li>
+    <li>
+      <LinkTo @route="repeats.reporting">
+        <i class="fa fa-bar-chart-o right"></i>
+        Reports
+      </LinkTo>
+    </li>
+    <li>
+      <LinkTo @route="repeats.setup">
+        <i class="fa fa-cogs right"></i>
+        Setup
+      </LinkTo>
+    </li>
+    <li>
+      <LinkTo @route="repeats.doctors">
+        <i class="fa fa-user-md right"></i>
+        Doctor Setup
+      </LinkTo>
+    </li>
+  </NavExpanderButton>
+  <NavExpanderButton
+    data-test-inform-nav
+    @openSection={{this.openSection}}
+    @inactiveRoute="inform.get-started"
+    @productActive={{this.usesInformPromotionsProduct}}
+    @sectionName="Inform"
+    @icon="product-inform"
+  >
+    <li>
+      <LinkTo @route="inform.promotions" data-test-promotions>
+        <i class="fa fa-picture-o right"></i>
+        Promotions
+      </LinkTo>
+    </li>
+    <li>
+      <LinkTo @route="inform.leads" data-test-leads>
+        <i class="fa fa-users right"></i>
+        Activations
+      </LinkTo>
+    </li>
+  </NavExpanderButton>
+  {{#if this.usesInformBroadcastProduct}}
+    <NavExpanderButton
+      data-test-broadcast-nav
+      @openSection={{this.openSection}}
+      @productActive={{true}}
+      @sectionName="Broadcast"
+      @icon="product-broadcast"
+    >
+      {{#if this.informBroadcastPatientSyncComplete}}
+        <li>
+          <LinkTo @route="inform.broadcasts">
+            <i class="fa fa-bullhorn right"></i>
+            Broadcasts
+          </LinkTo>
+        </li>
+      {{else if this.informBroadcastPatientSyncPending}}
+        <li>
+          <LinkTo
+            @route="inform.broadcasts.setup.syncing"
+            data-test-broadcast-syncing
+          >
+            <i class="fa fa-bullhorn right"></i>
+            Broadcasts
+          </LinkTo>
+        </li>
+      {{else}}
+        <li data-test-broadcast-setup-sync>
+          <LinkTo @route="inform.broadcasts.setup.get-started">
+            <i class="fa fa-bullhorn right"></i>
+            Broadcasts
+          </LinkTo>
+        </li>
+      {{/if}}
+    </NavExpanderButton>
+  {{/if}}
+  <NavExpanderButton
+    @openSection={{this.openSection}}
+    @inactiveRoute="kiosk.get-started"
+    @productActive={{this.usesKioskProduct}}
+    @sectionName="Check-in"
+    @icon="product-checkin"
+  >
+    <li>
+      <LinkTo @route="kiosk.history">
+        <i class="fa fa-history right"></i>
+        History
+      </LinkTo>
+    </li>
+    <li>
+      <LinkTo @route="kiosk.updated-details">
+        <i class="fa fa-edit right"></i>
+        Patient Updates
+      </LinkTo>
+    </li>
+    <li>
+      <LinkTo @route="kiosk.settings.appointment-types">
+        <i class="fa fa-wrench right"></i>
+        Settings
+      </LinkTo>
+    </li>
+  </NavExpanderButton>
+  {{#if this.usesRemoteWalkInsProduct}}
+    <NavExpanderButton
+      @openSection={{this.openSection}}
+      @inactiveRoute="remote-walk-ins.history"
+      @productActive={{this.usesRemoteWalkInsProduct}}
+      @sectionName="Remote Walk-in"
+      @icon="product-remote-walk-ins"
+    >
+      <li>
+        <LinkTo @route="remote-walk-ins.history">
+          <i class="fa fa-history right"></i>
+          History
+        </LinkTo>
+      </li>
+    </NavExpanderButton>
+  {{/if}}
+  {{#if this.usesFormsProduct}}
+    <NavExpanderButton
+      @openSection={{this.openSection}}
+      @inactiveRoute="forms.submitted"
+      @productActive={{this.usesFormsProduct}}
+      @sectionName="Forms"
+      @icon="product-forms"
+    >
+      <li>
+        <LinkTo @route="forms.settings">
+          <i class="fa fa-clipboard right"></i>
+          Forms
+        </LinkTo>
+      </li>
+      <li>
+        <LinkTo @route="forms.submitted">
+          <i class="fa fa-list right"></i>
+          Submitted
+        </LinkTo>
+      </li>
+    </NavExpanderButton>
+  {{/if}}
+  <NavExpanderButton
+    @openSection={{this.openSection}}
+    @sectionName="Setup"
+    @icon="setup-cogs"
+  >
+    <li>
+      <LinkTo @route="setup.practice-profile" @model={{this.clinicId}}>
+        <i class="fa fa-home right"></i>
+        Practice Profile
+      </LinkTo>
+    </li>
+    <li>
+      <LinkTo @route="practitioner-setup.index">
+        <i class="fa fa-user right"></i>
+        Practitioner Setup
+      </LinkTo>
+    </li>
+    <li>
+      <LinkTo @route="bookings.alerts">
+        <i class="fa fa-bullhorn right"></i>
+        Patient Alerts
+      </LinkTo>
+    </li>
+    <li>
+      <LinkTo @route="setup.install-hotdoc" @model={{this.clinicId}}>
+        <i class="fa fa-download right"></i>
+        Install HotDoc
+      </LinkTo>
+    </li>
+    {{#if this.usesCredits}}
+      <li>
+        <LinkTo @route="setup.credits.dashboard">
+          <i class="fa fa-credit-card right"></i>
+          Credits
+        </LinkTo>
+      </li>
+    {{/if}}
+  </NavExpanderButton>
+</ul>
+<ul class="small">
+  <li>
+    <a href="{{this.helpLink}}" target="_blank">
+      <i class="fa fa-comments right"></i>
+      Find your answer
+    </a>
+  </li>
+  <li>
+    <a href="{{this.mailToCustomerSuccess}}" target="_blank">
+      <i class="fa fa-comments right"></i>
+      Email your Customer Success Manager
+    </a>
+  </li>
+  <li>
+    <a href="{{this.mailToSupport}}" target="_blank">
+      <i class="fa fa-comments right"></i>
+      Get help on a technical issue
+    </a>
+  </li>
+  <li>
+    <a
+      href="http://www.teamviewer.com/link/?url=505374&id=498246621"
+      target="_blank"
+    >
+      <i class="fa fa-support right"></i>
+      Remote Support
+    </a>
+  </li>
+  <li>
+    <a href="#" {{action "logout"}}>
+      <i class="fa fa-power-off right"></i>
+      Log Out
+    </a>
+  </li>
+</ul>
