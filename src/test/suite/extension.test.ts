@@ -23,7 +23,6 @@ function getFixtures(filename: string) {
 }
 
 async function loadFixture(fixture: any) {
-
   const uri = vscode.Uri.file(fixture.infilePath);
   const document = await vscode.workspace.openTextDocument(uri);
   await vscode.window.showTextDocument(document);
@@ -49,6 +48,24 @@ suite('Extension Test Suite', () => {
     assert.equal(document.getText(), fixtures.infile);
 
     await vscode.commands.executeCommand('editor.action.formatDocument');
+
+    assert.equal(document.getText(), fixtures.outfile);
+    assert.notEqual(document.getText(), fixtures.infile);
+  });
+
+  test('Selection only', async () => {
+    const fixtures = getFixtures('selection');
+    const document = await loadFixture(fixtures);
+
+    assert.equal(document.getText(), fixtures.infile);
+
+    await vscode.commands.executeCommand('cursorMove', {
+      to: 'right',
+      value: 74,
+      select: true
+    });
+
+    await vscode.commands.executeCommand('editor.action.formatSelection');
 
     assert.equal(document.getText(), fixtures.outfile);
     assert.notEqual(document.getText(), fixtures.infile);

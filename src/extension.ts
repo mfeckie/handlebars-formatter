@@ -8,6 +8,7 @@ const prettier = require('prettier');
 
 export function activate(context: vscode.ExtensionContext) {
     vscode.languages.registerDocumentFormattingEditProvider({ scheme: 'file', language: 'handlebars' }, new PrettierHandlebarsFormatter());
+    vscode.languages.registerDocumentRangeFormattingEditProvider({ scheme: 'file', language: 'handlebars' }, new PrettierHandlebarsFormatter());
 }
 
 // this method is called when your extension is deactivated
@@ -23,8 +24,10 @@ class PrettierHandlebarsFormatter implements DocumentFormattingEditProvider, Doc
         const text = document.getText(range);
         const prettierOptions = {
             parser: 'glimmer'
-        }
+        };
+
         const formatted = prettier.format(text, prettierOptions);
+        
         return [TextEdit.replace(range, formatted)];
     }
     provideDocumentFormattingEdits(document: TextDocument, options: FormattingOptions, token: CancellationToken): ProviderResult<TextEdit[]> {
