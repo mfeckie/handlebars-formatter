@@ -15,7 +15,6 @@ This extension should respect options declared in `.prettierrc`.  If you wish to
     {
       "files": "*.hbs",
       "options": {
-        "parser": "glimmer",
         "singleQuote": false
       }
     }
