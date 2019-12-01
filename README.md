@@ -4,6 +4,25 @@ This extension allow you to format handlebars files using the currently unreleas
 
 Because it uses unreleased, it may break with future changes to Prettier.
 
+## Configuration
+
+This extension should respect options declared in `.prettierrc`.  If you wish to provide specific overrides you can do so like this
+
+```
+{
+  "singleQuote": true,
+  "overrides": [
+    {
+      "files": "*.hbs",
+      "options": {
+        "parser": "glimmer",
+        "singleQuote": false
+      }
+    }
+  ]
+}
+```
+
 ## Features
 
 Format your handlebars files with Prettier ... that's it!
