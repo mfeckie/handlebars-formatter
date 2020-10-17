@@ -38,6 +38,6 @@
     "vscode-test": "^1.4.0"
   },
   "dependencies": {
-    "prettier": "^2.1.1"
+    "prettier": "^2.1.2"
   }
 }
