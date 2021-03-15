@@ -2,7 +2,7 @@
   "name": "handlebars-formatter",
   "displayName": "handlebars-formatter",
   "description": "Prettier formatting for Handlebars files",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "publisher": "mfeckies",
   "repository": "https://github.com/mfeckie/handlebars-formatter.git",
   "engines": {
@@ -38,6 +38,6 @@
     "vscode-test": "^1.4.0"
   },
   "dependencies": {
-    "prettier": "^2.1.2"
+    "prettier": "^2.2.1"
   }
 }
